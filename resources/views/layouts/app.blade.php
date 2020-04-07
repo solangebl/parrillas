@@ -90,7 +90,7 @@
                   <a href="{{ route('deposits.index') }}" class="nav-link"><i class="fe fe-package"></i> Depósitos</a>
                 </li>
 				        <!--li class="nav-item">
-                  <a href="{{ route('products.index') }}" class="nav-link"><i class="fe fe-shopping-cart"></i> Productos</a>
+                  <a href="" class="nav-link"><i class="fe fe-shopping-cart"></i> Productos</a>
                 </li-->
               </ul>
             </div>
