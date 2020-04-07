@@ -78,16 +78,16 @@
             <div class="col-lg order-lg-first">
               <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                 <li class="nav-item">
-                  <a href="{{ url('/admin/home') }}" class="nav-link active"><i class="fe fe-home"></i> Home</a>
+                  <a href="{{ url('/admin/home') }}" class="nav-link {{ (empty(Request::segment(2)) || Request::segment(2)=='home') ? 'active' : '' }}"><i class="fe fe-home"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('categories.index') }}" class="nav-link"><i class="fe fe-tag"></i> Categorías</a>
+                  <a href="{{ route('categories.index') }}" class="nav-link {{ Request::segment(2)=='categories' ? 'active' : '' }}"><i class="fe fe-tag"></i> Categorías</a>
                 </li>
 				        <li class="nav-item">
-                  <a href="{{ route('providers.index') }}" class="nav-link"><i class="fe fe-truck"></i> Proveedores</a>
+                  <a href="{{ route('providers.index') }}" class="nav-link {{ Request::segment(2)=='providers' ? 'active' : '' }}"><i class="fe fe-truck"></i> Proveedores</a>
                 </li>
 				        <li class="nav-item">
-                  <a href="{{ route('deposits.index') }}" class="nav-link"><i class="fe fe-package"></i> Depósitos</a>
+                  <a href="{{ route('deposits.index') }}" class="nav-link {{ Request::segment(2)=='deposits' ? 'active' : '' }}"><i class="fe fe-package"></i> Depósitos</a>
                 </li>
 				        <!--li class="nav-item">
                   <a href="" class="nav-link"><i class="fe fe-shopping-cart"></i> Productos</a>
