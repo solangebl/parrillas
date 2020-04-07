@@ -13,7 +13,10 @@
 
     Route::get('/', 'FrontendController@index');
     Route::get('/product/{id}', 'FrontendController@project')->name('product.view');
-    Route::get('/products/{cat_slug}', 'FrontendController@products')->name('product.list');
+    //Route::get('/products/{cat_slug}', 'FrontendController@products')->name('product.list');
+    Route::get('/products/{cat_slug}', function(){
+      return view('front.404');
+    })->name('product.list');
     Route::get('/ayuda', 'FrontendController@help')->name('help');
     /*
     Route::get('/', function(){
@@ -33,7 +36,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 	Route::resource('providers', 'ProviderController');
 	Route::resource('deposits', 'DepositController');
 	Route::resource('categories', 'CategoryController');
-	Route::resource('products', 'ProductController');
+	//Route::resource('products', 'ProductController');
 	Route::delete('/projects/destroyImage/{imageId}', 'ProjectController@destroyImage')->name('projects.destroyImage');
 	Route::delete('/categories/destroySubcat/{subcatId}', 'CategoryController@destroySubcat')->name('categories.destroySubcat');
 	

@@ -18,7 +18,7 @@
 						<li><a href="{{ route('categories.index') }}"><i class="fe fe-tag"></i> Categorías</a></li>
 						<li><a href="{{ route('providers.index') }}"><i class="fe fe-truck"></i> Proveedores</a></li>
 						<li><a href="{{ route('deposits.index') }}"><i class="fe fe-package"></i> Depósitos</a></li>
-						<li><a href="{{ route('products.index') }}"><i class="fe fe-shopping-cart"></i> Productos</a></li>
+						<!--li><a href="{{ route('products.index') }}"><i class="fe fe-shopping-cart"></i> Productos</a></li-->
 					</ul>
                 </div>
             </div>
