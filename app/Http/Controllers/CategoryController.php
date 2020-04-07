@@ -75,6 +75,10 @@ class CategoryController extends Controller
         $subcategory->save();
       }
       $cat->save();
+      if(!($request->input('reload'))) {
+        return redirect('/admin/categories');
+      }
+
       return redirect(route('categories.edit', $cat->id));
     }
 

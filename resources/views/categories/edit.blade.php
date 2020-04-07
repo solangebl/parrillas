@@ -20,6 +20,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <input type="text" class="form-control" name="name" value="{{ $category->name }}">
+                        <input type="hidden" class="form-control" name="reload" value="1">
                     </div>
                 </div>  
             </div>
