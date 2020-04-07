@@ -95,7 +95,7 @@
 						@foreach ($categories as $cat)
 							@if(count($cat->subcategories) == 0)
 							<li class="nav-item">
-								<a class="nav-link" href="{{route('product.list', 'c-'.$scat->id)}}">{!! $cat->name !!}</a>
+								<a class="nav-link" href="{{route('product.list', 'c-'.$cat->id)}}">{!! $cat->name !!}</a>
 							</li>
 							@else
 							<li class="nav-item dropdown">
