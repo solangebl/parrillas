@@ -16,7 +16,7 @@
             <div class="panel-body"> 
               <table class="table">
                 <thead>
-                  <tr>
+                  <tr> 
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripción</th>
