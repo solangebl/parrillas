@@ -89,9 +89,9 @@
 				        <li class="nav-item">
                   <a href="{{ route('deposits.index') }}" class="nav-link {{ Request::segment(2)=='deposits' ? 'active' : '' }}"><i class="fe fe-package"></i> Depósitos</a>
                 </li>
-				        <!--li class="nav-item">
-                  <a href="" class="nav-link"><i class="fe fe-shopping-cart"></i> Productos</a>
-                </li-->
+				        <li class="nav-item">
+                  <a href="{{ route('products.index') }}" class="nav-link"><i class="fe fe-shopping-cart {{ Request::segment(2)=='products' ? 'active' : '' }}"></i> Productos</a>
+                </li>
               </ul>
             </div>
           </div>

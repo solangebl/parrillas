@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Project;
-use App\Client;
+use App\Product;
+use App\Provider;
+use App\Deposit;
 use App\Category;
-use App\ProjectImage;
+use App\Subcategory;
+use App\ProductImage;
 use Illuminate\Support\Facades\Storage;
 
-class ProjectController extends Controller
+class ProductController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,15 +29,16 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-		return view('projects.index', [
-			'projects' => Project::all()
+		return view('products.index', [
+			'products' => Product::all()
 		]);
 	}
 
 	public function create(){
-		return view('projects.add', [
-			'clients' => Client::orderBy('name', 'asc')->get(),
-			'categories' => Category::orderBy('name_es', 'asc')->get(),
+		return view('products.add', [
+			'providers' => Provider::orderBy('name', 'asc')->get(),
+			'deposits' => Deposit::orderBy('name', 'asc')->get(),
+			'categories' => Category::with('subcategories')->orderBy('name', 'asc')->get(),
 		]);
 	}
 
@@ -47,34 +50,44 @@ class ProjectController extends Controller
      */
     public function store(Request $request){
 		$rules = [
-			'client_id' => 'required',
+			'provider_id' => 'required',
 			'thumbnail' => 'required|image|mimes:jpg,jpeg,bmp,png|max:5000',
-			'description_es' => 'required',
+			'description' => 'required',
+			'category_id' => 'required',
+			'name' => 'required',
 		];
 		//print_r($request->all()); die;
 		$images = isset($request->images) ? count($request->images) : 0;
-			if(!empty($request->input('images')[0])){
-				foreach(range(0, $images) as $index){
-				$rules['images.'. $index] = 'image|mimes:jpg,jpeg,bmp,png|max:5000';
-				}
+		if(!empty($request->input('images')[0])){
+			foreach(range(0, $images) as $index){
+			$rules['images.'. $index] = 'image|mimes:jpg,jpeg,bmp,png|max:5000';
 			}
-			$validatedData = $request->validate($rules);
-
-			$project = Project::create([
-				'client_id' => $request->input('client_id'),
-				'description_es' => $request->input('description_es'),
-			]);
-			foreach($request->categories as $category){
-				$project->categories()->attach($category);
 		}
+		$validatedData = $request->validate($rules);
+
+		$product = Product::create([
+			'name' => $request->input('name'),
+			'provider_id' => $request->input('provider_id'),
+			'description' => $request->input('description'),
+			'other' => $request->input('other'),
+			'category_id' => $request->input('category_id'),
+			'subcategory_id' => $request->input('subcategory_id'),
+			'deposit_id' => $request->input('deposit_id'),
+			'provider_id' => $request->input('provider_id'),
+			'buy_price' => $request->input('buy_price'),
+			'sale_price' => $request->input('sale_price'),
+			'sale_price_ml' => $request->input('sale_price_ml'),
+			'amount' => $request->input('amount'),
+		]);
 		
 		if(!empty($request->thumbnail)){
 			$image = $request->thumbnail;
 			$originalName = $image->getClientOriginalName();
-			$path = $image->storeAs('projects/'. $project->id .'/thumbnail', $originalName);
+			print_r($originalName);
+			$path = $image->storeAs('products/'. $product->id .'/thumbnail', $originalName);
 		
-			$project->thumbnail = $originalName;
-			$project->save();
+			$product->thumbnail = $originalName;
+			$product->save();
 		}
 
 		if($images>0){
@@ -82,10 +95,10 @@ class ProjectController extends Controller
 			foreach($request->images as $image){
 				if(!empty($image)){
 					$originalName = $image->getClientOriginalName();
-					$path = $image->storeAs('projects/'. $project->id, $originalName);
+					$path = $image->storeAs('products/'. $product->id, $originalName);
 		  
-					$articleImage = ProjectImage::create([
-						'project_id' => $project->id,
+					$articleImage = ProductImage::create([
+						'product_id' => $product->id,
 						'image' => $originalName,
 						'order' => $i
 					]);
@@ -94,21 +107,18 @@ class ProjectController extends Controller
 			}
 		}
 		
-		return redirect('/admin/projects');
+		return redirect('/admin/products');
 	}
 
 	public function edit($id){
-		$project = Project::find($id);
-		$pcategories = [];
-		foreach ($project->categories as $cat) {
-			$pcategories[] = $cat->id;
-		} 
-		return view('projects.edit', [
-			'project' => $project,
-			'images' => Project::find($id)->images()->orderBy('order')->get(),
-			'pcategories' => $pcategories,
-			'clients' => Client::orderBy('name', 'asc')->get(),
-			'categories' => Category::orderBy('name_es', 'asc')->get(),
+		$product = Product::find($id);
+
+		return view('products.edit', [
+			'product' => $product,
+			'images' => Product::find($id)->images()->orderBy('order')->get(),
+			'providers' => Provider::orderBy('name', 'asc')->get(),
+			'deposits' => Deposit::orderBy('name', 'asc')->get(),
+			'categories' => Category::with('subcategories')->orderBy('name', 'asc')->get(),
 		]);
 	}
 
@@ -119,9 +129,10 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
+		//print_r($request->all()); die;
 		$rules = [
-			'client_id' => 'required',
-			'description_es' => 'required',
+			'description' => 'required',
+			'name' => 'required',
 		];
 		$images = isset($request->images) ? count($request->images) : 0;
 		if(!empty($request->input('images')[0])){
@@ -134,32 +145,22 @@ class ProjectController extends Controller
 		}
 		$validatedData = $request->validate($rules);
 
-		$project = Project::find($id);
-		$project->fill($request->all());
+		$product = Product::find($id);
+		$product->fill($request->all());
 
-		foreach($project->categories as $p){
-			$project->categories()->detach($p);
-		}
-		if($request->has('categories') && !empty($request->input('categories'))){
-			foreach($request->input('categories') as $cat){
-				$category = Category::find($cat);
-				$project->categories()->attach($category);
-			}
-		}
-
-		foreach ($project->images as $image) {
+		foreach ($product->images as $image) {
 			$image->update(['order' => $request->image_order[$image->id]]);
 		}
 
 		if ($images>0) {
-			$i = count($project->images);
+			$i = count($product->images);
 			foreach($request->images as $image){
 			  if(!empty($image)){
 				$originalName = $image->getClientOriginalName();
-				$path = $image->storeAs('projects/'. $project->id, $originalName);
+				$path = $image->storeAs('products/'. $product->id, $originalName);
 	  
-				$projectImage = ProjectImage::create([
-				  'project_id' => $project->id,
+				$productImage = ProductImage::create([
+				  'product_id' => $product->id,
 				  'image' => $originalName,
 				  'order' => $i,
 				]);
@@ -169,15 +170,16 @@ class ProjectController extends Controller
 		}
 		if(!empty($request->thumbnail)){
 			$image = $request->thumbnail;
+			print_r($image);
 			$originalName = $image->getClientOriginalName();
-			$path = $image->storeAs('projects/'. $project->id .'/thumbnail', $originalName);
+			$path = $image->storeAs('products/'. $product->id .'/thumbnail', $originalName);
 		
-			$project->thumbnail = $originalName;
+			$product->thumbnail = $originalName;
 		}
-		$project->save();
+		$product->save();
 
 
-		return redirect('/admin/projects');
+		return redirect('/admin/products');
 	}
 
 	/**
@@ -188,9 +190,9 @@ class ProjectController extends Controller
      */
     public function destroy($id){
         
-		Project::destroy($id);
+		Product::destroy($id);
   
-		return redirect('/admin/projects');
+		return redirect('/admin/products');
 	}
 
 	/**
@@ -201,11 +203,11 @@ class ProjectController extends Controller
      */
     public function destroyImage($id){
 		
-		$image = ProjectImage::find($id);
-		$pid = $image->project->id;
-		Storage::delete('/storage/projects/'. $pid. '/'. $image->image);
-		ProjectImage::destroy($id);
+		$image = ProductImage::find($id);
+		$pid = $image->product->id;
+		Storage::delete('/storage/products/'. $pid. '/'. $image->image);
+		ProductImage::destroy($id);
   
-		return redirect('/admin/projects/'.$pid.'/edit');
+		return redirect('/admin/products/'.$pid.'/edit');
 	}
 }

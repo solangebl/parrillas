@@ -14,7 +14,7 @@ class Product extends Model
      */
     protected $fillable = [
 		'description', 'provider_id', 'category_id', 'thumbnail', 'subcategory_id', 'deposit_id', 'buy_price', 'sale_price',
-		'sale_price_ml', 'amount', 'other', 'active'
+		'sale_price_ml', 'amount', 'other', 'active', 'name'
 	];
 	
 	public function images(){

@@ -12,60 +12,111 @@
         @include('parts.errors')
 
             <div class="panel-body">
-              <form action="{{ route('projects.store') }}" class="needs-validation" novalidate method="POST" enctype="multipart/form-data">
+              <form action="{{ route('products.store') }}" class="needs-validation" novalidate method="POST" enctype="multipart/form-data">
               {{ csrf_field() }}
               <fieldset>
                 <div class='row'>
-                  	<div class='col-md-4 col-sm-12'>
-						<div class='form-group'>
-						<label for="client_id">Cliente</label>
-						<select class="form-control" required name="client_id" id="client_id">
-							<option value="">Seleccione un cliente</option>
-							@foreach($clients as $client)
-							<option value="{{ $client->id }}" {{(old('client_id')==$client->id) ? 'selected' : ''}}>{{ $client->name }}</option>
-							@endforeach
-						</select>
-						</div>
-                  	</div>
-                  	<div class='col-md-4 col-sm-12'>    
-						<div class='form-group'>
-              <label for="categories">Categorías</label>
-							<select class="form-control" required name="categories[]" id="categories" multiple="multiple">
-								<option value="">Seleccione las categorías</option>
-								@foreach($categories as $category)
-								<option value="{{ $category->id }}" {{is_array(old('categories')) && in_array($category->id, old('categories')) ? 'selected' : ''}}>{{ $category->name_es }}</option>
-								@endforeach
-							</select>
-						</div>
-                	</div>
-				</div>
+                  <div class='col-md-6 col-sm-12'>
+                    <div class='form-group'>
+                      <label for="name">Nombre</label>
+                      <input type="text" class="form-control" name="name" id="name" value={{ old('name') }}>
+                    </div>
+                  </div>
+                  <div class='col-md-6 col-sm-12'>
+                    <div class='form-group'>
+                      <label for="active">Activo</label>
+                      <select class="form-control" required name="active" id="active">
+                        <option value="1" {{(old('active')==1) ? 'selected' : ''}}>Sí</option>
+                        <option value="0" {{(old('active')==0) ? 'selected' : ''}}>No</option>
+                      </select>
+                    </div>
+                  </div>
+				        </div>
+                <div class='row'>
+                  <div class='col-md-6 col-sm-12'>
+                    <div class='form-group'>
+                      <label for="provider_id">Proveedor</label>
+                      <select class="form-control" required name="provider_id" id="provider_id">
+                        <option value="">Seleccione un proveedor</option>
+                        @foreach($providers as $provider)
+                        <option value="{{ $provider->id }}" {{(old('client_id')==$provider->id) ? 'selected' : ''}}>{{ $provider->name }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  <div class='col-md-6 col-sm-12'>
+                    <div class='form-group'>
+                      <label for="deposit_id">Depósito</label>
+                      <select class="form-control" required name="deposit_id" id="deposit_id">
+                        <option value="">Seleccione un depósito</option>
+                        @foreach($deposits as $deposit)
+                        <option value="{{ $deposit->id }}" {{(old('deposit_id')==$deposit->id) ? 'selected' : ''}}>{{ $deposit->name }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+				        </div>
+
+              <div class="row">
+                <div class='col-md-6 col-sm-12'>    
+                  <div class='form-group'>
+                    <label for="categories">Categoría</label>
+                    <select class="form-control" required name="category_id" id="category_id" >
+                      <option value="">Seleccione la categoría</option>
+                      @foreach($categories as $category)
+                      <option value="{{ $category->id }}" {{ $category->id==old('category_id') ? 'selected' : ''}}>{{ $category->name }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class='col-md-6 col-sm-12'>    
+                  <div class='form-group'>
+                    <label for="categories">Subcategoría</label>
+                    <select class="form-control" name="subcategory_id" id="subcategory_id" >
+                      <option value="">Seleccione una subcategoría</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class='row'>
+                <div class='col-md-3 col-sm-12'>
+                  <div class='form-group'>
+                    <label for="name">Precio Compra</label>
+                    <input type="number" class="form-control" name="buy_price" id="buy_price" value={{ old('buy_price') }}>
+                  </div>
+                </div>
+                <div class='col-md-3 col-sm-12'>
+                  <div class='form-group'>
+                    <label for="sale_price">Precio Venta</label>
+                    <input type="number" class="form-control" name="sale_price" id="sale_price" value={{ old('sale_price') }}>
+                  </div>
+                </div>
+                <div class='col-md-3 col-sm-12'>
+                  <div class='form-group'>
+                    <label for="sale_price_ml">Precio ML</label>
+                    <input type="number" class="form-control" name="sale_price_ml" id="sale_price_ml" value={{ old('sale_price_ml') }}>
+                  </div>
+                </div>
+                <div class='col-md-3 col-sm-12'>
+                  <div class='form-group'>
+                    <label for="amount">Cantidad</label>
+                    <input type="number" class="form-control" name="amount" id="amount" value={{ old('amount') }}>
+                  </div>
+                </div>
+              </div>
 
                 <div class="row">
-                  <div class='col-md-4 col-sm-12'>
+                  <div class='col-md-6 col-sm-12'>
                     <div class='form-group'>
-                      <label for="text">Descripción en español</label>
-                      <textarea class="form-control description" id="description_es" name="description_es" size="30" rows="10" maxlength="500">{{old('description_es')}}</textarea>
+                      <label for="text">Descripción</label>
+                      <textarea class="form-control description" id="description" name="description" size="30" rows="10" maxlength="500">{{old('description')}}</textarea>
                     </div>
                   </div>
-                  <div class='col-md-4 col-sm-12'>
+                  <div class='col-md-6 col-sm-12'>
                     <div class='form-group'>
-                      <label for="description_en">Descripción en inglés</label>
-                      <textarea class="form-control description" id="description_en" name="description_en" size="30" rows="10" maxlength="200">{{old('description_en')}}</textarea>
-                    </div>
-                  </div>
-				</div>
-
-				<div class="row">
-                  <div class='col-md-4 col-sm-12'>
-                    <div class='form-group'>
-                      <label for="comments">Descripción en francés</label>
-                      <textarea class="form-control description" id="description_fr" name="description_fr" size="30" rows="10" maxlength="200">{{old('description_fr')}}</textarea>
-                    </div>
-                  </div>
-				  <div class='col-md-4 col-sm-12'>
-                    <div class='form-group'>
-                      <label for="comments">Descripción en portugués</label>
-                      <textarea class="form-control description" id="description_pt" name="description_pt" size="30" rows="10" maxlength="200">{{old('description_pt')}}</textarea>
+                      <label for="text">Notas</label>
+                      <textarea class="form-control other" id="other" name="other" size="30" rows="10" maxlength="500">{{old('other')}}</textarea>
                     </div>
                   </div>
                 </div>
@@ -89,7 +140,7 @@
               <button type="submit" class="btn btn-primary">
                 <i class="fe fe-file-plus mr-2"></i> Guardar
               </button>
-              <a class="btn btn-danger" href="{{ route('projects.index') }}"><i class="fe fe-rewind mr-2"></i> Cancelar</a>
+              <a class="btn btn-danger" href="{{ route('products.index') }}"><i class="fe fe-rewind mr-2"></i> Cancelar</a>
             </form>
             </div>
         <!--/div-->
@@ -100,6 +151,8 @@
 @section('script')
 
 <script>
+
+var categories = @json($categories);
 
 $(document).ready(function(){
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -114,8 +167,10 @@ $(document).ready(function(){
       form.classList.add('was-validated');
     }, false);
   });
-
+  
   tinymce.init({ selector:'.description' });
+  tinymce.init({ selector:'.other' });
+  $('#category_id').on('change', function(){ loadSubcats( $('#category_id'), $('#subcategory_id'), categories ) });
   
 });
 

@@ -12,102 +12,136 @@
         @include('parts.errors')
 
             <div class="panel-body">
-              <form action="{{ route('projects.update', $project->id) }}" class="needs-validation" novalidate method="POST" enctype="multipart/form-data">
+              <form action="{{ route('products.update', $product->id) }}" class="needs-validation" novalidate method="POST" enctype="multipart/form-data">
               {{ csrf_field() }}
-			  {{ method_field('PUT') }}
+        		{{ method_field('PUT') }}
               <fieldset>
                 <div class='row'>
-                  	<div class='col-md-4 col-sm-12'>
-						<div class='form-group'>
-						<label for="client_id">Cliente</label>
-						<select class="form-control" required name="client_id" id="client_id">
-							<option value="">Seleccione un cliente</option>
-							@foreach($clients as $client)
-							<option value="{{ $client->id }}" {{$project->client->id==$client->id ? 'selected' : ''}}>{{ $client->name }}</option>
-							@endforeach
-						</select>
-						</div>
-                  	</div>
-                  	<div class='col-md-4 col-sm-12'>    
-						<div class='form-group'>
-							<label for="categories">Categorías</label>
-							<select class="form-control" required name="categories[]" id="categories" multiple="multiple">
-								<option value="">Seleccione las categorías</option>
-								@foreach($categories as $category)
-								<option value="{{ $category->id }}" {{(in_array($category->id, $pcategories)) ? 'selected' : ''}}>{{ $category->name_es }}</option>
-								@endforeach
-							</select>
-						</div>
-                	</div>
-				</div>
+                  <div class='col-md-6 col-sm-12'>
+                    <div class='form-group'>
+                      <label for="name">Nombre</label>
+                      <input type="text" class="form-control" name="name" id="name" value={{ $product->name }}>
+                    </div>
+                  </div>
+                  <div class='col-md-6 col-sm-12'>
+                    <div class='form-group'>
+                      <label for="active">Activo</label>
+                      <select class="form-control" required name="active" id="active">
+                        <option value="1" {{($product->active==1) ? 'selected' : ''}}>Sí</option>
+                        <option value="0" {{($product->active==0) ? 'selected' : ''}}>No</option>
+                      </select>
+                    </div>
+                  </div>
+				        </div>
+                <div class='row'>
+                  <div class='col-md-6 col-sm-12'>
+                    <div class='form-group'>
+                      <label for="provider_id">Proveedor</label>
+                      <select class="form-control" required name="provider_id" id="provider_id">
+                        <option value="">Seleccione un proveedor</option>
+                        @foreach($providers as $provider)
+                        <option value="{{ $provider->id }}" {{($product->provider_id==$provider->id) ? 'selected' : ''}}>{{ $provider->name }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  <div class='col-md-6 col-sm-12'>
+                    <div class='form-group'>
+                      <label for="deposit_id">Depósito</label>
+                      <select class="form-control" required name="deposit_id" id="deposit_id">
+                        <option value="">Seleccione un depósito</option>
+                        @foreach($deposits as $deposit)
+                        <option value="{{ $deposit->id }}" {{($product->deposit_id==$deposit->id) ? 'selected' : ''}}>{{ $deposit->name }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+				        </div>
+
+              <div class="row">
+                <div class='col-md-6 col-sm-12'>    
+                  <div class='form-group'>
+                    <label for="categories">Categoría</label>
+                    <select class="form-control" required name="category_id" id="category_id" >
+                      <option value="">Seleccione la categoría</option>
+                      @foreach($categories as $category)
+                      <option value="{{ $category->id }}" {{$product->category_id == $category->id ? 'selected' : ''}}>{{ $category->name }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class='col-md-6 col-sm-12'>    
+                  <div class='form-group'>
+                    <label for="categories">Subcategoría</label>
+                    <select class="form-control" name="subcategory_id" id="subcategory_id" >
+                      <option value="">Seleccione una subcategoría</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class='row'>
+                <div class='col-md-3 col-sm-12'>
+                  <div class='form-group'>
+                    <label for="name">Precio Compra</label>
+                    <input type="number" class="form-control" name="buy_price" id="buy_price" value={{ $product->buy_price }}>
+                  </div>
+                </div>
+                <div class='col-md-3 col-sm-12'>
+                  <div class='form-group'>
+                    <label for="sale_price">Precio Venta</label>
+                    <input type="number" class="form-control" name="sale_price" id="sale_price" value={{ $product->sale_price }}>
+                  </div>
+                </div>
+                <div class='col-md-3 col-sm-12'>
+                  <div class='form-group'>
+                    <label for="sale_price_ml">Precio ML</label>
+                    <input type="number" class="form-control" name="sale_price_ml" id="sale_price_ml" value={{ $product->sale_price_ml }}>
+                  </div>
+                </div>
+                <div class='col-md-3 col-sm-12'>
+                  <div class='form-group'>
+                    <label for="amount">Cantidad</label>
+                    <input type="number" class="form-control" name="amount" id="amount" value={{ $product->amount }}>
+                  </div>
+                </div>
+              </div>
 
                 <div class="row">
-                  <div class='col-md-4 col-sm-12'>
+                  <div class='col-md-6 col-sm-12'>
                     <div class='form-group'>
-                      <label for="text">Descripción en español</label>
-                      <textarea class="form-control description" id="description_es" name="description_es" size="30" rows="10" maxlength="500">{{ $project->description_es }}</textarea>
+                      <label for="text">Descripción</label>
+                      <textarea class="form-control description" id="description" name="description" size="30" rows="10" maxlength="500">{{$product->description}}</textarea>
                     </div>
                   </div>
-                  <div class='col-md-4 col-sm-12'>
+                  <div class='col-md-6 col-sm-12'>
                     <div class='form-group'>
-                      <label for="description_en">Descripción en inglés</label>
-                      <textarea class="form-control description" id="description_en" name="description_en" size="30" rows="10" maxlength="200">{{ $project->description_en }}</textarea>
-                    </div>
-                  </div>
-				</div>
-
-				<div class="row">
-                  <div class='col-md-4 col-sm-12'>
-                    <div class='form-group'>
-                      <label for="comments">Descripción en francés</label>
-                      <textarea class="form-control description" id="description_fr" name="description_fr" size="30" rows="10" maxlength="200">{{ $project->description_fr }}</textarea>
-                    </div>
-                  </div>
-				  <div class='col-md-4 col-sm-12'>
-                    <div class='form-group'>
-                      <label for="comments">Descripción en portugués</label>
-                      <textarea class="form-control description" id="description_pt" name="description_pt" size="30" rows="10" maxlength="200">{{ $project->description_pt }}</textarea>
+                      <label for="text">Notas</label>
+                      <textarea class="form-control other" id="other" name="other" size="30" rows="10" maxlength="500">{{ $product->other }}</textarea>
                     </div>
                   </div>
                 </div>
-				<div class="row">
-					<div class='col-md-4 col-sm-12'>
-						<div class='form-group image-group'>
-						<label for="thumbnail">Thumbnail</label>
-						<input type="file" class="form-control" id="" name="thumbnail" >
-						<span><a href="{{ asset('storage/projects/'. $project->id . '/thumbnail/' .$project->thumbnail) }}" target="_blank">{{ $project->thumbnail }}</a></span>
-						</div>
-					</div>
-					<div class='col-md-4 col-sm-12'>
-						<div class="form-group image-group">
-						<label for="images[]">Agregar Imagenes</label>
-						<input type="file" class="form-control" id="" name="images[]" multiple>
-						</div>
-					</div>
-				</div>
 
-				<div class="row">
-				@foreach ($project->images as $image)
-				<div class="col-md-4 col-sm-12">
-				  	<div class="form-inline">
-						<button class="btn btn-danger" onClick="deleteImage({{$image->id}})" type="button"><i class="fe fe-trash-2 mr-2"></i>Eliminar</button>
-					</div>
-					<img src="{{ asset('storage/projects/'. $project->id . '/' .$image->image) }}" alt="">
-					<select name="image_order[{{$image->id}}]" id="">
-						@for ($i = 0; $i < count($images); $i++)
-						<option value="{{$i}}" {{($image->order == $i) ? 'selected' : ''}}>{{$i}}</option>
-						@endfor
-					</select>
-				</div>
-				@endforeach
-				</div>
-				<br><br>
-			  
+                <div class="row">
+                  <div class='col-md-4 col-sm-12'>
+                    <div class='form-group image-group'>
+                      <label for="thumbnail">Thumbnail</label>
+                      <input type="file" class="form-control" id="" name="thumbnail" >
+                    </div>
+                  </div>
+                  <div class='col-md-4 col-sm-12'>
+                    <div class='form-group image-group'>
+                      <label for="images[]">Imagenes</label>
+                      <input type="file" class="form-control" id="" name="images[]" multiple>
+                    </div>
+                  </div>
+                </div>
+                
+              </fieldset>
               <button type="submit" class="btn btn-primary">
                 <i class="fe fe-file-plus mr-2"></i> Guardar
               </button>
-              <a class="btn btn-danger" href="{{ route('projects.index') }}"><i class="fe fe-rewind mr-2"></i> Cancelar</a>
-              </fieldset>
+              <a class="btn btn-danger" href="{{ route('products.index') }}"><i class="fe fe-rewind mr-2"></i> Cancelar</a>
             </form>
             </div>
 
@@ -152,6 +186,7 @@ $(document).ready(function(){
   });
 
   tinymce.init({ selector:'.description' });
+  tinymce.init({ selector:'.other' });
   
 });
 
