@@ -3,14 +3,14 @@
 @section('content')
 <div class="page-header">
   <h1 class="page-title">
-    Proyectos
+    Productos
   </h1>
 </div>
 <div class="row">
     <div class="col-md-12 col-md-offset-1">
         <div class="panel panel-default">
             <div class="panel-heading">
-				<a href="{{ route('products.create') }}"><span class="fe fe-plus"></span> Nuevo Proyecto</a>
+				<a href="{{ route('products.create') }}"><span class="fe fe-plus"></span> Nuevo Producto</a>
             </div>
 			<br>
             <div class="panel-body"> 
@@ -34,7 +34,7 @@
                       <form action="{{ route('products.destroy', $product->id)}}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                        <button class="btn btn-danger" onClick="return confirm('Seguro desea eliminar al proyecto #{{ $product->id }}?')" type="submit"><i class="fe fe-user-x mr-2"></i>Eliminar</button>
+                        <button class="btn btn-danger" onClick="return confirm('Seguro desea eliminar el producto #{{ $product->id }}?')" type="submit"><i class="fe fe-user-x mr-2"></i>Eliminar</button>
                       </form>
                     </td>
                   </tr>
