@@ -210,6 +210,7 @@ $(document).ready(function(){
   $('#category_id').on('change', function(){ loadSubcats( $('#category_id'), $('#subcategory_id'), categories ) });
 
   loadSubcats( $('#category_id'), $('#subcategory_id'), categories );
+  $('#subcategory_id').val({{$product->subcategory_id}});
   
 });
 
