@@ -34,7 +34,22 @@ class FrontendController extends Controller
 		
 		return view('front.product', [
 			'product' => Product::find($id),
-			'images' => ProductImage::where('product_id', $id)->orderBy('order')->get(),
+			'images' => ProductImage::where('product_id', $id)->get(),
+		]);
+	}
+	
+	public function products($cat_id) {
+		
+		if(substr($cat_id, 0, 1) == 'c') {
+			$filter = 'category_id';
+		} else {
+			$filter = 'subcategory_id';
+		}
+		$cat = substr($cat_id, 2);
+		$products = Product::where($filter, $cat)->get();
+		
+		return view('front.products', [
+			'products' => $products,
 		]);
 	}
 

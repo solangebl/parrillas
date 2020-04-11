@@ -177,6 +177,8 @@
 
 <script>
 
+var categories = @json($categories);
+
 function deleteImage(id) {
 	if (confirm('Seguro desea eliminar la imagen?')) {
 		$('#imageId').val(id);
@@ -205,6 +207,9 @@ $(document).ready(function(){
 
   tinymce.init({ selector:'.description' });
   tinymce.init({ selector:'.other' });
+  $('#category_id').on('change', function(){ loadSubcats( $('#category_id'), $('#subcategory_id'), categories ) });
+
+  loadSubcats( $('#category_id'), $('#subcategory_id'), categories );
   
 });
 

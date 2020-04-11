@@ -100,7 +100,6 @@ class ProductController extends Controller
 					$articleImage = ProductImage::create([
 						'product_id' => $product->id,
 						'image' => $originalName,
-						'order' => $i
 					]);
 					$i++;
 				}
@@ -115,7 +114,7 @@ class ProductController extends Controller
 
 		return view('products.edit', [
 			'product' => $product,
-			'images' => Product::find($id)->images()->orderBy('order')->get(),
+			'images' => Product::find($id)->get(),
 			'providers' => Provider::orderBy('name', 'asc')->get(),
 			'deposits' => Deposit::orderBy('name', 'asc')->get(),
 			'categories' => Category::with('subcategories')->orderBy('name', 'asc')->get(),
@@ -147,10 +146,6 @@ class ProductController extends Controller
 
 		$product = Product::find($id);
 		$product->fill($request->all());
-
-		foreach ($product->images as $image) {
-			$image->update(['order' => $request->image_order[$image->id]]);
-		}
 
 		if ($images>0) {
 			$i = count($product->images);
