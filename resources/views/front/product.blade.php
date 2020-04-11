@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="volanta">
-    <a href="">{!! $product->category !!}</a> / {!! $product->subcategory !!}
+    <a href="">{!! $product->category['name'] !!}</a> / {!! $product->subcategory['name'] !!}
 </div>
 
 <div class="detalleProducto">
@@ -12,10 +12,10 @@
 
             <div id="carouselFicha" class="carousel slide mb-4" data-ride="carousel">
                 <div class="carousel-inner">
-                    @foreac($product->images as $image)
+                    @foreach($product->images as $image)
                     <div class="carousel-item active">
                         <a href="" data-toggle="modal" data-target="#modalAmpliarPic">
-                            <img src="/img/producto-demo.jpg" class="img-fluid" alt="" />
+                            <img src="{{ asset('storage/products/'. $product->id . '/' .$image->image) }}" class="img-fluid" alt="" />
                         </a>
                     </div>
                     @endforeach
@@ -37,7 +37,7 @@
 
         </div>
         <div class="col-12 col-lg-6">
-            <div class="seccion">{!! $product->category !!}</div>
+            <div class="seccion">{!! $product->category['name'] !!}</div>
             <h1>{!! $product->name !!}</h1>
             <hr />
             <div class="precio">$ {!! $product->sale_price !!}</div>

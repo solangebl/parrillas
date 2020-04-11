@@ -14,9 +14,7 @@
     Route::get('/', 'FrontendController@index');
     Route::get('/product/{id}', 'FrontendController@project')->name('product.view');
     Route::get('/products/{cat_slug}', 'FrontendController@products')->name('product.list');
-    Route::get('/products/{cat_slug}', function(){
-      return view('front.404');
-    })->name('product.list');
+    Route::get('/product/{id}', 'FrontendController@product')->name('product.view');
     Route::get('/ayuda', 'FrontendController@help')->name('help');
     /*
     Route::get('/', function(){
@@ -37,7 +35,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 	Route::resource('deposits', 'DepositController');
 	Route::resource('categories', 'CategoryController');
 	Route::resource('products', 'ProductController');
-	Route::delete('/projects/destroyImage/{imageId}', 'ProjectController@destroyImage')->name('projects.destroyImage');
+	Route::delete('/products/destroyImage/{imageId}', 'ProductController@destroyImage')->name('products.destroyImage');
 	Route::delete('/categories/destroySubcat/{subcatId}', 'CategoryController@destroySubcat')->name('categories.destroySubcat');
 	
 	Route::get('/home', 'HomeController@index')->name('home');

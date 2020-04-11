@@ -68,7 +68,7 @@ class ProviderController extends Controller
 			'name' => 'required',
 		];
 		$validatedData = $request->validate($rules);
-
+		
 		$provider = Provider::find($id);
 		if (!empty($provider)) {
 			$provider->name = $request->input('name');

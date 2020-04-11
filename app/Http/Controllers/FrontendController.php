@@ -30,7 +30,7 @@ class FrontendController extends Controller
 		]);
 	}
 
-	public function product($lang, $id) {
+	public function product($id) {
 		
 		return view('front.product', [
 			'product' => Product::find($id),

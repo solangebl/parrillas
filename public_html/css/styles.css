@@ -88,6 +88,13 @@ header .buscador .btn {
 nav ul {
 	width: 100%;
 }
+.error404 {
+	text-align: center;
+}
+.error404 img {
+	max-width: 150px;
+	margin-bottom: 3em;
+}
 .colLeft label {
 	padding: 0.2rem 0.4rem;
 	background: #d9d9d9;

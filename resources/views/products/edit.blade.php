@@ -127,15 +127,33 @@
                     <div class='form-group image-group'>
                       <label for="thumbnail">Thumbnail</label>
                       <input type="file" class="form-control" id="" name="thumbnail" >
+                      <span><a href="{{ asset('storage/products/'. $product->id . '/thumbnail/' .$product->thumbnail) }}" target="_blank">{{ $product->thumbnail }}</a></span>
                     </div>
                   </div>
                   <div class='col-md-4 col-sm-12'>
                     <div class='form-group image-group'>
-                      <label for="images[]">Imagenes</label>
+                      <label for="images[]">Agregar Imagenes</label>
                       <input type="file" class="form-control" id="" name="images[]" multiple>
                     </div>
                   </div>
                 </div>
+
+                <div class="row">
+                @foreach ($product->images as $image)
+                <div class="col-md-4 col-sm-12">
+                    <div class="form-inline">
+                    <button class="btn btn-danger" onClick="deleteImage({{$image->id}})" type="button"><i class="fe fe-trash-2 mr-2"></i>Eliminar</button>
+                  </div>
+                  <img src="{{ asset('storage/products/'. $product->id . '/' .$image->image) }}" alt="">
+                  <!--select name="image_order[{{$image->id}}]" id="">
+                    @for ($i = 0; $i < count($images); $i++)
+                    <option value="{{$i}}" {{($image->order == $i) ? 'selected' : ''}}>{{$i}}</option>
+                    @endfor
+                  </select-->
+                </div>
+                @endforeach
+                </div>
+                <br><br>
                 
               </fieldset>
               <button type="submit" class="btn btn-primary">
@@ -162,7 +180,7 @@
 function deleteImage(id) {
 	if (confirm('Seguro desea eliminar la imagen?')) {
 		$('#imageId').val(id);
-		$('#deleteImageForm').attr('action', '/admin/projects/destroyImage/'+ id);
+		$('#deleteImageForm').attr('action', '/admin/products/destroyImage/'+ id);
 		$('#deleteImageForm').submit();
 	} else {
 		return false;
