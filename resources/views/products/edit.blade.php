@@ -3,7 +3,7 @@
 @section('content')
 <div class="page-header">
   <h1 class="page-title">
-  Editar Proyecto
+  Editar Producto
   </h1>
 </div>
 <div class="row">
