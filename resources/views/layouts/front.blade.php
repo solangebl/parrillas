@@ -63,9 +63,10 @@
 							<a href="">QUIENES SOMOS</a> | <a href="/ayuda">AYUDA</a>
 						</div>
 						<div class="buscador">
-							<form action="" method="post" name="search">
+							<form action="{{ route('products.search') }}" method="post" name="search">
 								<i class="fas fa-search"></i>
-								<input type="text" name="" id="" class="form-control w-50" placeholder="Buscar productos...">
+								{{ csrf_field() }}
+								<input type="text" name="name" id="" class="form-control w-50" placeholder="Buscar productos...">
 								<button type="submit" class="btn btn-primary">buscar</button>
 							</form>
 						</div>

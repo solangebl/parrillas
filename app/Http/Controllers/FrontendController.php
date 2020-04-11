@@ -52,6 +52,13 @@ class FrontendController extends Controller
 			'products' => $products,
 		]);
 	}
+	
+	public function search(Request $request) {
+		
+		return view('front.products', [
+			'products' => Product::where('name', 'like', '%'. $request->input('name') .'%')->get(),
+		]);
+	}
 
 	public function help(){
 		return view('front.help');

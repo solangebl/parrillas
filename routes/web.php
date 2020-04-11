@@ -15,6 +15,7 @@
     Route::get('/product/{id}', 'FrontendController@project')->name('product.view');
     Route::get('/products/{cat_slug}', 'FrontendController@products')->name('product.list');
     Route::get('/product/{id}', 'FrontendController@product')->name('product.view');
+    Route::post('/search', 'FrontendController@search')->name('products.search');
     Route::get('/ayuda', 'FrontendController@help')->name('help');
     /*
     Route::get('/', function(){
