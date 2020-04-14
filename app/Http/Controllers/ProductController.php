@@ -157,7 +157,6 @@ class ProductController extends Controller
 				$productImage = ProductImage::create([
 				  'product_id' => $product->id,
 				  'image' => $originalName,
-				  'order' => $i,
 				]);
 				$i++;
 			  }
