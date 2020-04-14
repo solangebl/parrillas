@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 	Route::resource('categories', 'CategoryController');
 	Route::resource('products', 'ProductController');
 	Route::delete('/products/destroyImage/{imageId}', 'ProductController@destroyImage')->name('products.destroyImage');
+	Route::put('/products/quickUpdate/{id}', 'ProductController@quickUpdate')->name('products.quickUpdate');
 	Route::delete('/categories/destroySubcat/{subcatId}', 'CategoryController@destroySubcat')->name('categories.destroySubcat');
 	
 	Route::get('/home', 'HomeController@index')->name('home');

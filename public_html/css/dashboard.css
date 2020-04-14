@@ -18608,3 +18608,7 @@ svg {
 .fe-zoom-out:before {
   content: "\ea06";
 }
+
+.btn-quick-save {
+  transition: visibility 0s 2s, opacity 2s linear;
+}

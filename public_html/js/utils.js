@@ -15,7 +15,7 @@ function loadSubcats(dom_selected_country, dom_to_load, cats, default_opt ){
         var opt = $('<option>').val('').html(default_opt);
         dom_to_load.append(opt);
         selected.subcategories.forEach(function(e){
-          var opt = $('<option>').val(e.id).html(e.name);
+          var opt = $('<option>').val(e.id).html(e.name); 
           dom_to_load.append(opt);
         });
       } else {
@@ -24,4 +24,26 @@ function loadSubcats(dom_selected_country, dom_to_load, cats, default_opt ){
     } else {
       alert('Error obteniendo subcategorías');
     }
+}
+
+function product_edit(form_id) {
+  event.preventDefault();
+  var data = $('#'+form_id).serialize();
+  $.ajax({
+    url:  $('#'+form_id).attr('action'),
+    type: 'PUT',
+    data: data,
+    dataType: 'json',
+    success: function(res){
+      if(res.result) {
+        $('#btn-'+form_id).addClass('bg-green');
+        setTimeout(function(){
+          $('#btn-'+form_id).removeClass('bg-green');
+        },2000)
+      }
+    },
+    error: function(){
+        alert("Error al actualizar producto");
+    }  
+  });
 }

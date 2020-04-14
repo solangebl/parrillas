@@ -176,6 +176,13 @@ class ProductController extends Controller
 		return redirect('/admin/products');
 	}
 
+	public function quickUpdate(Request $request, $id) {
+		$product = Product::find($id);
+		$product->fill($request->all());
+		$res = $product->save();
+		return response()->json(['result' => $res]);
+	}
+
 	/**
      * Remove the specified resource from storage.
      *
