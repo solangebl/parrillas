@@ -8,39 +8,40 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Parrillas Martinez - Administrador') }}</title>
+    <title>{{ config('app.name', 'Parrillas Martínez - Administrador') }}</title>
 
     <!-- Scripts -->
     <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
     <!-- Dashboard Core -->
-    
+
     <script type="text/javascript" src="{{ asset('js/dashboard.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/utils.js') }}"></script>
-    
-    
+
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-    
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
-    
+
 
     <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div id="app">
       <div class="page">
-        
+
       <div class="page-main">
         <div class="header py-4">
           <div class="container">
             <div class="d-flex">
                 <a class="header-brand" href="{{ url('/admin/home') }}">
-                  <img src="{{ asset('img/logo.png') }}" class="header-brand-img" alt="Parrillas Martinez - Administrador">
+                  <img src="{{ asset('img/header/logo-encabezado.png') }}" class="header-brand-img" alt="Parrillas Martínez - Administrador">
+                    Parrillas Martínez - Administrador
                 </a>
                 <div class="d-flex order-lg-2 ml-auto">
                   @guest
@@ -101,12 +102,12 @@
 
       <div class="my-3 my-md-5">
           <div class="container">
-            
+
           @yield('content')
           </div>
       </div>
-    
-      
+
+
       <!-- End page -->
       </div>
     <!-- End App -->
