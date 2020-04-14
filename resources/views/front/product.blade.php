@@ -29,11 +29,6 @@
                     <span class="sr-only">Siguiente</span>
                 </a>
             </div>
-            <script>
-                $('.carousel').carousel({
-                    interval: 2000
-                })
-            </script>
 
         </div>
         <div class="col-12 col-lg-6">
@@ -55,4 +50,14 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function(){
+        $('.carousel').carousel({
+            interval: 2000
+        })
+    })
+</script>
 @endsection
