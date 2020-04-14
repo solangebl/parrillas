@@ -18610,5 +18610,5 @@ svg {
 }
 
 .btn-quick-save {
-  transition: visibility 0s 2s, opacity 2s linear;
+  padding: 0;
 }

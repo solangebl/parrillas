@@ -36,7 +36,7 @@
                         <input type="number" name="sale_price" id="" value="{{ $product->sale_price }}" size="10" style="border:none">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
-                        <button class="btn btn-link" id="btn-price-{{$product->id}}" type="button" onClick="product_edit('price-'+ {{$product->id}})" ><i class="fe fe-check-circle"></i></button>
+                        <button class="btn btn-link btn-quick-save" id="btn-price-{{$product->id}}" type="button" onClick="product_edit('price-'+ {{$product->id}})" ><i class="fe fe-check-circle"></i></button>
                       </form>
                     </td>
                     <td scope="row">
@@ -44,7 +44,7 @@
                         <input type="number" name="amount" id="" value="{{ $product->amount }}" size="10" style="border:none">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
-                        <button class="btn btn-link" id="btn-stock-{{$product->id}}" type="button" onClick="product_edit('stock-' + {{$product->id}} )" ><i class="fe fe-check-circle"></i></button>
+                        <button class="btn btn-link btn-quick-save" id="btn-stock-{{$product->id}}" type="button" onClick="product_edit('stock-' + {{$product->id}} )" ><i class="fe fe-check-circle"></i></button>
                       </form>
                     </td>
                     <td class="form-inline">
