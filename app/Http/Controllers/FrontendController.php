@@ -34,7 +34,7 @@ class FrontendController extends Controller
 		
 		return view('front.product', [
 			'product' => Product::find($id),
-			'images' => ProductImage::where('active', 1)->where('product_id', $id)->get(),
+			'images' => ProductImage::where('product_id', $id)->get(),
 		]);
 	}
 	

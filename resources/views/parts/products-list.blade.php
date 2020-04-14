@@ -11,7 +11,7 @@
             <div class="precio">$ {{ $product->sale_price }}</div>
         </a>
         <div class="wa">
-            <a href="">
+            <a href="https://wa.me/5491136830254?text={{ urlencode('Estoy interesado en el producto'. $product->name) }}" target="_blank">
                 <i class="fab fa-whatsapp"></i> <span>HACÉ TU CONSULTA</span>
             </a>
         </div>
