@@ -63,15 +63,4 @@ class FrontendController extends Controller
 	public function help(){
 		return view('front.help');
 	}
-
-	/*
-	public function contact_send(Request $request)
-    {
-
-        Mail::to(['info@kilak.com'])->send(new Contacto($request));
-        // Mail::to(['solange.blundi@gmail.com','info@kilak.com'])->send(new Contacto($request));
-
-        return redirect('/'. App::getLocale() );
-	}
-	*/
 }

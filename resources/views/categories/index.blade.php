@@ -51,7 +51,7 @@
                       <form action="{{ route('categories.destroy', $category->id)}}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                        <button class="btn btn-danger btn-small" onClick="return confirm('Seguro desea eliminar la categoría {{ $category->name }}?')" type="submit"><i class="fe fe-trash-2 mr-2"></i>Eliminar</button>
+                        <button class="btn btn-danger btn-small" onClick="return confirm('Seguro desea eliminar la categoría {{ $category->name }}? Si tiene productos asociados, éstos serán eliminados también')" type="submit"><i class="fe fe-trash-2 mr-2"></i>Eliminar</button>
                       </form>
                     </td>
                   </tr>
