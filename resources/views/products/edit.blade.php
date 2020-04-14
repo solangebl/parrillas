@@ -127,7 +127,6 @@
                     <div class='form-group image-group'>
                       <label for="thumbnail">Thumbnail</label>
                       <input type="file" class="form-control" id="" name="thumbnail" >
-                      <span><a href="{{ asset('storage/products/'. $product->id . '/thumbnail/' .$product->thumbnail) }}" target="_blank">{{ $product->thumbnail }}</a></span>
                     </div>
                   </div>
                   <div class='col-md-4 col-sm-12'>
@@ -137,19 +136,22 @@
                     </div>
                   </div>
                 </div>
+                <div class="row">
+                <h5>Thumbnail</h5><br>
+                  <div class="col-md-4">
+                    <img src="{{ asset('storage/products/'. $product->id . '/thumbnail/' .$product->thumbnail) }}" alt="">
+                  </div>
+                </div>
+                <br><br>
 
                 <div class="row">
+                <h5>Imágenes</h5><br>
                 @foreach ($product->images as $image)
                 <div class="col-md-4 col-sm-12">
                     <div class="form-inline">
                     <button class="btn btn-danger" onClick="deleteImage({{$image->id}})" type="button"><i class="fe fe-trash-2 mr-2"></i>Eliminar</button>
                   </div>
                   <img src="{{ asset('storage/products/'. $product->id . '/' .$image->image) }}" alt="">
-                  <!--select name="image_order[{{$image->id}}]" id="">
-                    @for ($i = 0; $i < count($images); $i++)
-                    <option value="{{$i}}" {{($image->order == $i) ? 'selected' : ''}}>{{$i}}</option>
-                    @endfor
-                  </select-->
                 </div>
                 @endforeach
                 </div>
