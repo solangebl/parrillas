@@ -26,8 +26,8 @@
                     <div class='form-group'>
                       <label for="active">Activo</label>
                       <select class="form-control" required name="active" id="active">
-                        <option value="1" {{(old('active')==1) ? 'selected' : ''}}>Sí</option>
-                        <option value="0" {{(old('active')==0) ? 'selected' : ''}}>No</option>
+                        <option value="1" selected>Sí</option>
+                        <option value="0" >No</option>
                       </select>
                     </div>
                   </div>
