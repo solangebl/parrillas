@@ -10,6 +10,7 @@ use App\Category;
 use App\Subcategory;
 use App\ProductImage;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -166,9 +167,11 @@ class ProductController extends Controller
 		if(!empty($request->thumbnail)){
 			$image = $request->thumbnail;
 			$originalName = $image->getClientOriginalName();
-			$path = $image->storeAs('products/'. $product->id .'/thumbnail', $originalName);
+			print_r($originalName); die;
+			$renamed = (string) Str::uuid();
+			$path = $image->storeAs('products/'. $product->id .'/thumbnail', $renamed);
 		
-			$product->thumbnail = $originalName;
+			$product->thumbnail = $renamed;
 		}
 		$product->save();
 

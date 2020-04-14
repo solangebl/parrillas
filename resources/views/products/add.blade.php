@@ -168,7 +168,7 @@ $(document).ready(function(){
     }, false);
   });
   
-  tinymce.init({ selector:'.description' });
+  tinymce.init({ selector:'.description'});
   tinymce.init({ selector:'.other' });
   $('#category_id').on('change', function(){ loadSubcats( $('#category_id'), $('#subcategory_id'), categories ) });
   

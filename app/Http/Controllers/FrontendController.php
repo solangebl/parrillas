@@ -26,7 +26,7 @@ class FrontendController extends Controller
     public function index(){
 		return view('front.index', [
 			'categories' => Category::all(),
-			'products' => Product::all(),
+			'products' => Product::where('active', 1)->get(),
 		]);
 	}
 
@@ -34,7 +34,7 @@ class FrontendController extends Controller
 		
 		return view('front.product', [
 			'product' => Product::find($id),
-			'images' => ProductImage::where('product_id', $id)->get(),
+			'images' => ProductImage::where('active', 1)->where('product_id', $id)->get(),
 		]);
 	}
 	
@@ -46,7 +46,7 @@ class FrontendController extends Controller
 			$filter = 'subcategory_id';
 		}
 		$cat = substr($cat_id, 2);
-		$products = Product::where($filter, $cat)->get();
+		$products = Product::where('active', 1)->where($filter, $cat)->get();
 		
 		return view('front.products', [
 			'products' => $products,
@@ -56,7 +56,7 @@ class FrontendController extends Controller
 	public function search(Request $request) {
 		
 		return view('front.products', [
-			'products' => Product::where('name', 'like', '%'. $request->input('name') .'%')->get(),
+			'products' => Product::where('active', 1)->where('name', 'like', '%'. $request->input('name') .'%')->get(),
 		]);
 	}
 
