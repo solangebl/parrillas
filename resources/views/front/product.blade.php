@@ -12,8 +12,8 @@
 
             <div id="carouselFicha" class="carousel slide mb-4" data-ride="carousel">
                 <div class="carousel-inner">
-                    @foreach($product->images as $image)
-                    <div class="carousel-item active">
+                    @foreach($product->images as $k => $image)
+                    <div class="carousel-item {{$k==0 ? 'active' : ''}}">
                         <a href="" data-toggle="modal" data-target="#modalAmpliarPic">
                             <img src="{{ asset('storage/products/'. $product->id . '/' .$image->image) }}" class="img-fluid" alt="" />
                         </a>
