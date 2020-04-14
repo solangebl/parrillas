@@ -19,7 +19,7 @@
                   <div class='col-md-6 col-sm-12'>
                     <div class='form-group'>
                       <label for="name">Nombre</label>
-                      <input type="text" class="form-control" name="name" id="name" value={{ old('name') }}>
+                      <input type="text" class="form-control" name="name" id="name" required value={{ old('name') }}>
                     </div>
                   </div>
                   <div class='col-md-6 col-sm-12'>
@@ -89,7 +89,7 @@
                 <div class='col-md-3 col-sm-12'>
                   <div class='form-group'>
                     <label for="sale_price">Precio Venta</label>
-                    <input type="number" class="form-control" name="sale_price" id="sale_price" value={{ old('sale_price') }}>
+                    <input type="number" class="form-control" name="sale_price" id="sale_price" required value={{ old('sale_price') }}>
                   </div>
                 </div>
                 <div class='col-md-3 col-sm-12'>
@@ -131,7 +131,7 @@
                   <div class='col-md-4 col-sm-12'>
                     <div class='form-group image-group'>
                       <label for="images[]">Imagenes</label>
-                      <input type="file" class="form-control" id="" name="images[]" multiple>
+                      <input type="file" class="form-control" id="" required name="images[]" multiple>
                     </div>
                   </div>
                 </div>

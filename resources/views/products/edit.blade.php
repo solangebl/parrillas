@@ -20,7 +20,7 @@
                   <div class='col-md-6 col-sm-12'>
                     <div class='form-group'>
                       <label for="name">Nombre</label>
-                      <input type="text" class="form-control" name="name" id="name" value={{ $product->name }}>
+                      <input type="text" class="form-control" name="name" required id="name" value={{ $product->name }}>
                     </div>
                   </div>
                   <div class='col-md-6 col-sm-12'>
@@ -90,7 +90,7 @@
                 <div class='col-md-3 col-sm-12'>
                   <div class='form-group'>
                     <label for="sale_price">Precio Venta</label>
-                    <input type="number" class="form-control" name="sale_price" id="sale_price" value={{ $product->sale_price }}>
+                    <input type="number" class="form-control" name="sale_price" id="sale_price" required value={{ $product->sale_price }}>
                   </div>
                 </div>
                 <div class='col-md-3 col-sm-12'>
@@ -133,7 +133,7 @@
                   <div class='col-md-4 col-sm-12'>
                     <div class='form-group image-group'>
                       <label for="images[]">Agregar Imagenes</label>
-                      <input type="file" class="form-control" id="" name="images[]" multiple>
+                      <input type="file" class="form-control" id="" {{count($product->images)==0 ? 'required' : ''}} name="images[]" multiple>
                     </div>
                   </div>
                 </div>

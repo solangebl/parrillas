@@ -55,6 +55,7 @@ class ProductController extends Controller
 			'description' => 'required',
 			'category_id' => 'required',
 			'name' => 'required',
+			'sale_price' => 'required',
 		];
 		//print_r($request->all()); die;
 		$images = isset($request->images) ? count($request->images) : 0;
@@ -83,7 +84,6 @@ class ProductController extends Controller
 		if(!empty($request->thumbnail)){
 			$image = $request->thumbnail;
 			$originalName = $image->getClientOriginalName();
-			print_r($originalName);
 			$path = $image->storeAs('products/'. $product->id .'/thumbnail', $originalName);
 		
 			$product->thumbnail = $originalName;
@@ -132,6 +132,7 @@ class ProductController extends Controller
 		$rules = [
 			'description' => 'required',
 			'name' => 'required',
+			'sale_price' => 'required',
 		];
 		$images = isset($request->images) ? count($request->images) : 0;
 		if(!empty($request->input('images')[0])){
@@ -164,7 +165,6 @@ class ProductController extends Controller
 		}
 		if(!empty($request->thumbnail)){
 			$image = $request->thumbnail;
-			print_r($image);
 			$originalName = $image->getClientOriginalName();
 			$path = $image->storeAs('products/'. $product->id .'/thumbnail', $originalName);
 		
