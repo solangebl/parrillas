@@ -47,10 +47,10 @@
 					</div>
 					<div class="col-12 col-lg-6 text-center text-lg-right">
 						<div class="redes">
-							<a href=""><i class="fab fa-instagram"></i></a>
+							<a href="https://www.instagram.com/parrillas.martinez/" target="_target"><i class="fab fa-instagram"></i></a>
 							<a href="https://www.facebook.com/parrillas.martinez" target="_blank"><i class="fab fa-facebook-f"></i></a>
-							<a href=""><i class="fab fa-twitter"></i></a>
-							<a href=""><i class="fab fa-youtube"></i></a>
+							<!--a href=""><i class="fab fa-twitter"></i></a>
+							<a href=""><i class="fab fa-youtube"></i></a-->
 							<a href="https://wa.me/5491136830254" target="_blank"><i class="fab fa-whatsapp"></i></a>
 							<a href="mailto:parrillasmartinez@hotmail.com"><i class="far fa-envelope"></i></a>
 						</div>
@@ -77,8 +77,8 @@
 	</div>
 
 	<div class="container">
-		
-		
+
+
 		<!-- WhatsApp Flotante | Inicio -->
 		<div class="text-right mr-5 mr-lg-4">
 			<a href="https://wa.me/5491136830254" target="_blank" class="whatsappGlobal"><i class="fab fa-whatsapp"></i></a>
@@ -112,7 +112,7 @@
 								</div>
 							</li>
 							@endif
-						@endforeach	
+						@endforeach
 						</ul>
 					</div>
 
@@ -131,7 +131,7 @@
 					<img src="/img/formas-de-pago.jpg" class="img-fluid mx-auto d-block" alt="" />
 				</div>
 			</div>
-			
+
 
 
 
@@ -139,11 +139,11 @@
 
 				<!-- CONTENT -->
 				@yield('content')
-		
+
 			</main>
 		</div>
 	</div>
-	
+
 	<footer class="container-fluid mt-5">
 		<div class="container py-3">
 			<div class="row align-items-center">
@@ -159,11 +159,11 @@
 			</div>
 		</div>
 	</footer>
-	
+
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
-	
+
 </body>
 </html>
