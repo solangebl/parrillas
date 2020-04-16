@@ -28,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::share('categories', Category::all());
+        View::share('categories', Category::with(['subcategories'=>function($q){
+            $q->whereHas('products');
+        }])->get());
     }
 }

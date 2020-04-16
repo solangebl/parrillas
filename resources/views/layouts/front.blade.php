@@ -94,10 +94,12 @@
 						<ul class="navbar-nav">
 						<label>CATEGORÍAS</label>
 						@foreach ($categories as $cat)
-							@if(count($cat->subcategories) == 0 && count($cat->products)>0)
-							<li class="nav-item">
-								<a class="nav-link" href="{{route('product.list', 'c-'.$cat->id)}}">{!! $cat->name !!}</a>
-							</li>
+							@if(count($cat->subcategories) == 0)
+								@if(count($cat->products)>0)
+								<li class="nav-item">
+									<a class="nav-link" href="{{route('product.list', 'c-'.$cat->id)}}">{!! $cat->name !!}</a>
+								</li>
+								@endif
 							@else
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

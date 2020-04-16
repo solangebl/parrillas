@@ -167,9 +167,8 @@ class ProductController extends Controller
 		if(!empty($request->thumbnail)){
 			$image = $request->thumbnail;
 			$originalName = $image->getClientOriginalName();
-			print_r($originalName); die;
 			$renamed = (string) Str::uuid();
-			$path = $image->storeAs('products/'. $product->id .'/thumbnail', $renamed);
+			$path = $image->storeAs('products/'. $product->id .'/thumbnail', $originalName);
 		
 			$product->thumbnail = $renamed;
 		}
