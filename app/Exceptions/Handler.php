@@ -47,14 +47,6 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
 		if ($this->isHttpException($exception)) {
-			$segment = $request->segment(1);
-            if (!in_array($segment, config('app.locales'))) {    
-
-                return redirect()->to('/'.config('app.fallback_locale'));
-                
-            }
-            session(['locale' => $segment]);
-            app()->setLocale($segment);
 			if ($exception->getStatusCode() == 404) {
 				return response()->view('front.' . '404', [], 404);
 			}
