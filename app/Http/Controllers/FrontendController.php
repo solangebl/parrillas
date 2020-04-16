@@ -25,7 +25,6 @@ class FrontendController extends Controller
      */
     public function index(){
 		return view('front.index', [
-			'categories' => Category::all(),
 			'products' => Product::where('active', 1)->get(),
 		]);
 	}
