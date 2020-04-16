@@ -105,7 +105,9 @@
 								</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 									@foreach($cat->subcategories as $scat)
+									@if(count($scat->products)>0)
 									<a class="dropdown-item" href="{{route('product.list', 's-'.$scat->id)}}">{!! $scat->name !!}</a>
+									@endif
 									@endforeach
 								</div>
 							</li>
