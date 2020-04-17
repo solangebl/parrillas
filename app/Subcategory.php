@@ -17,7 +17,7 @@ class Subcategory extends Model
 	];
 	
 	public function category(){
-		return $this->belongsToOne('App\Category');
+		return $this->belongsTo('App\Category');
 	}
     
     public function products(){

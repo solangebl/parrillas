@@ -107,4 +107,14 @@ class CategoryController extends Controller
     
       return redirect('/admin/categories');
     }
+
+    public function updateSubcat(Request $request, $id){
+      $subcat = Subcategory::find($id);
+      if (!empty($subcat)) {
+        $subcat->fill($request->all());
+      }
+      $subcat->save();
+
+      return redirect(route('categories.edit', $subcat->category->id));
+    }
 }
