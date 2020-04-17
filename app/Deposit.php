@@ -17,7 +17,7 @@ class Deposit extends Model
 	];
 	
 	public function products(){
-		return $this->hasMany('App\Products');
+		return $this->hasMany('App\Product');
 	}
 
 }

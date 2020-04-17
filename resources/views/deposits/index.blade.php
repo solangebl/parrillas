@@ -48,11 +48,13 @@
                     <td>{{ $deposit->name }}</td>
                     <td class="form-inline">
                     <a class="btn btn-info" href="{{ route('deposits.edit', $deposit->id)}}"><i class="fe fe-edit mr-2"></i>Editar </a> &nbsp;&nbsp;
+                      @if(count($deposit->products)==0)
                       <form action="{{ route('deposits.destroy', $deposit->id)}}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button class="btn btn-danger" onClick="return confirm('Seguro desea eliminar al depósito {{ $deposit->name }}?')" type="submit"><i class="fe fe-user-x mr-2"></i>Eliminar</button>
                       </form>
+                      @endif
                     </td>
                   </tr>
                   @endforeach
