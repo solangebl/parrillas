@@ -48,11 +48,13 @@
                     <td class="form-inline">
                       <button class="btn btn-info" onClick="showEditForm('{{ route('categories.update', $category->id) }}','{{$category->name}}' )"><i class="fe fe-cloud-lightning mr-2"></i>Edición Rápida </button> &nbsp;&nbsp;
                       <a class="btn btn-info" href="{{ route('categories.edit', $category->id) }}"><i class="fe fe-edit mr-2"></i>Editar </a> &nbsp;&nbsp;
+                      @if(count($category->products)==0)
                       <form action="{{ route('categories.destroy', $category->id)}}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button class="btn btn-danger btn-small" onClick="return confirm('Seguro desea eliminar la categoría {{ $category->name }}? Si tiene productos asociados, éstos serán eliminados también')" type="submit"><i class="fe fe-trash-2 mr-2"></i>Eliminar</button>
                       </form>
+                      @endif
                     </td>
                   </tr>
                   @endforeach

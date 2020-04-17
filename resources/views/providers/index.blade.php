@@ -48,11 +48,13 @@
                     <td>{{ $provider->name }}</td>
                     <td class="form-inline">
                     <a class="btn btn-info" href="{{ route('providers.edit', $provider->id)}}"><i class="fe fe-edit mr-2"></i>Editar </a> &nbsp;&nbsp;
+                      @if(count($provider->products)==0)
                       <form action="{{ route('providers.destroy', $provider->id)}}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button class="btn btn-danger" onClick="return confirm('Seguro desea eliminar al providere {{ $provider->name }}?')" type="submit"><i class="fe fe-user-x mr-2"></i>Eliminar</button>
                       </form>
+                      @endif
                     </td>
                   </tr>
                   @endforeach
