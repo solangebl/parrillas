@@ -31,7 +31,9 @@ class ProductController extends Controller
      */
     public function index(){
 		return view('products.index', [
-			'products' => Product::all()
+			'products' => Product::all(),
+			'categories' => Category::all(),
+			'subcategories' => Subcategory::all(),
 		]);
 	}
 
@@ -183,6 +185,36 @@ class ProductController extends Controller
 		$product->fill($request->all());
 		$res = $product->save();
 		return response()->json(['result' => $res]);
+	}
+
+	public function priceUpdate(Request $request) {
+		$query = Product::where('active', 1);
+		$perc = $request->input('perc');
+		if(empty($perc) || $perc <= 0 || $perc > 100) {
+			return redirect('/admin/products');
+		}
+
+		if(!empty($request->input('category'))) {
+			$query->where('category_id', $request->input('category'));
+		}
+
+		if(!empty($request->input('subcategory'))) {
+			$query->where('subcategory_id', $request->input('subcategory'));
+		}
+		$products = $query->get();
+
+		foreach($products as $prod) {
+			$new_price = $prod->sale_price + ($prod->sale_price*$perc/100);
+			if ($new_price%10!=0) {
+				$new_price += (10-($new_price%10));
+				$new_price = round($new_price, 0);
+			}
+			// print_r($new_price. "\n");
+			$prod->sale_price = $new_price;
+			$prod->save();
+		}
+		
+		return redirect('/admin/products');
 	}
 
 	/**

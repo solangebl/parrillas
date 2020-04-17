@@ -10,9 +10,28 @@
     <div class="col-md-12 col-md-offset-1">
         <div class="panel panel-default">
             <div class="panel-heading">
-				<a href="{{ route('products.create') }}"><span class="fe fe-plus"></span> Nuevo Producto</a>
+				    <a href="{{ route('products.create') }}"><span class="fe fe-plus"></span> Nuevo Producto</a>
+            <div class="form-inline">
+              <form action="{{ route('products.priceUpdate') }}" method="POST">
+                {{ csrf_field() }}
+                <select class="form-control" name="category" id="">
+                  <option value="">Seleccione Categoría</option>
+                  @foreach($categories as $category)
+                  <option value="{{ $category->id }}">{!! $category->name !!}</option>
+                  @endforeach
+                </select>
+                <select class="form-control" name="subcategory" id="">
+                  <option value="">Seleccione Subcategoría</option>
+                  @foreach($subcategories as $sc)
+                    <option value="{{ $sc->id }}">{!! $sc->name !!}</option>
+                  @endforeach
+                </select>
+                <input type="number" name="perc" class="form-control" id="" min="0" max="100">
+                <button class="btn btn-default" type="submit"><i class="fe fe-dollar-sign">Actualizar Precios</i></button>
+              </form>
             </div>
-			<br>
+            </div>
+			      <br>
             <div class="panel-body"> 
               <table class="table">
                 <thead>
