@@ -68,7 +68,7 @@
                     </td>
                     <td scope="row">
                       <form action="{{ route('products.quickUpdate', $product->id)}}" method="post" id="priceml-{{$product->id}}">
-                        <input type="number" name="price_ml" id="" value="{{ $product->price_ml }}" size="10" style="border:none">
+                        <input type="number" name="sale_price_ml" id="" value="{{ $product->sale_price_ml }}" size="10" style="border:none">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <button class="btn btn-link btn-quick-save" id="btn-priceml-{{$product->id}}" type="button" onClick="product_edit('priceml-'+ {{$product->id}})" ><i class="fe fe-check-circle"></i></button>
