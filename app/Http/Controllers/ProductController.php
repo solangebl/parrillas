@@ -169,8 +169,10 @@ class ProductController extends Controller
 		if(!empty($request->thumbnail)){
 			$image = $request->thumbnail;
 			$originalName = $image->getClientOriginalName();
-			$renamed = (string) Str::uuid();
-			$path = $image->storeAs('products/'. $product->id .'/thumbnail', $originalName);
+			$ext = explode('.', $originalName);
+			$ext = $ext[count($ext)-1];
+			$renamed = '/'. (string) Str::uuid() . '.' . $ext;
+			$path = $image->storeAs('products/'. $product->id .'/thumbnail', $renamed);
 		
 			$product->thumbnail = $renamed;
 		}
