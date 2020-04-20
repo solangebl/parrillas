@@ -86,7 +86,8 @@ class ProductController extends Controller
 		
 		if(!empty($request->thumbnail)){
 			$image = $request->thumbnail;
-			$originalName = $image->getClientOriginalName();
+			$ext = $image->getClientOriginalExtension();
+			$originalName = (string) Str::uuid() . '.' . $ext;
 			$path = $image->storeAs('products/'. $product->id .'/thumbnail', $originalName);
 		
 			$product->thumbnail = $originalName;
@@ -97,7 +98,8 @@ class ProductController extends Controller
 			$i = 0;
 			foreach($request->images as $image){
 				if(!empty($image)){
-					$originalName = $image->getClientOriginalName();
+					$ext = $image->getClientOriginalExtension();
+					$originalName = (string) Str::uuid() . '.' . $ext;
 					$path = $image->storeAs('products/'. $product->id, $originalName);
 		  
 					$articleImage = ProductImage::create([
@@ -155,7 +157,8 @@ class ProductController extends Controller
 			$i = count($product->images);
 			foreach($request->images as $image){
 			  if(!empty($image)){
-				$originalName = $image->getClientOriginalName();
+				$ext = $image->getClientOriginalExtension();
+				$originalName = (string) Str::uuid() . '.' . $ext;
 				$path = $image->storeAs('products/'. $product->id, $originalName);
 	  
 				$productImage = ProductImage::create([
@@ -168,10 +171,8 @@ class ProductController extends Controller
 		}
 		if(!empty($request->thumbnail)){
 			$image = $request->thumbnail;
-			$originalName = $image->getClientOriginalName();
-			$ext = explode('.', $originalName);
-			$ext = $ext[count($ext)-1];
-			$renamed = '/'. (string) Str::uuid() . '.' . $ext;
+			$ext = $image->getClientOriginalExtension();
+			$renamed = (string) Str::uuid() . '.' . $ext;
 			$path = $image->storeAs('products/'. $product->id .'/thumbnail', $renamed);
 		
 			$product->thumbnail = $renamed;
@@ -247,4 +248,5 @@ class ProductController extends Controller
   
 		return redirect('/admin/products/'.$pid.'/edit');
 	}
+	
 }
