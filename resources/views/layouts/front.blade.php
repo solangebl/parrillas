@@ -121,10 +121,10 @@
 				</nav>
 
 				<div class="zonaCobertura">
-					<label>ZONA DE COBERTURA</label>
-					<i class="fas fa-map-marked-alt"></i> Zona Norte, Gran Buenos Aires, Argentina
+					<label>PUNTO DE RETIRO</label>
+					<i class="fas fa-map-marked-alt"></i> Martínez, Gran Buenos Aires, Argentina
 					<div class="embed-responsive embed-responsive-16by9 mt-3">
-						<iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26306.88532231155!2d-58.53274596327861!3d-34.493739680704465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb05662e4a08d%3A0x9811553c3a21048c!2sMart%C3%ADnez%2C%20Buenos%20Aires%20Province!5e0!3m2!1sen!2sar!4v1581622703065!5m2!1sen!2sar" width="240" height="300" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+						<iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3287.7948217372036!2d-58.53398148492247!3d-34.50808558048442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb08cd4f3f1b1%3A0xc3c667e6fd140229!2sParrillasMartinez!5e0!3m2!1sen!2sar!4v1587404921928!5m2!1sen!2sar" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 					</div>
 				</div>
 
