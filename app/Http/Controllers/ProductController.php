@@ -29,11 +29,27 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index(Request $request, Product $prod){
+		$cat_id = $request->query('category');
+		$subcat_id = $request->query('subcategory');
+
+		$query = $prod->newQuery();
+		
+		if(!empty($cat_id)) {
+			$query->where('category_id', $cat_id);
+		} 
+		
+		if(!empty($subcat_id)) {
+			$query->where('subcategory_id', $cat_id);
+		}
+		$products = $query->get();
+
 		return view('products.index', [
-			'products' => Product::all(),
+			'products' => $products,
 			'categories' => Category::all(),
 			'subcategories' => Subcategory::all(),
+			'cat_id' => $cat_id,
+			'scat_id' => $subcat_id,
 		]);
 	}
 

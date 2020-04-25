@@ -10,26 +10,45 @@
     <div class="col-md-12 col-md-offset-1">
         <div class="panel panel-default">
             <div class="panel-heading">
-				    <a href="{{ route('products.create') }}"><span class="fe fe-plus"></span> Nuevo Producto</a>
-            <div class="form-inline">
-              <form action="{{ route('products.priceUpdate') }}" method="POST">
-                {{ csrf_field() }}
-                <select class="form-control" name="category" id="">
-                  <option value="">Seleccione Categoría</option>
-                  @foreach($categories as $category)
-                  <option value="{{ $category->id }}">{!! $category->name !!}</option>
-                  @endforeach
-                </select>
-                <select class="form-control" name="subcategory" id="">
-                  <option value="">Seleccione Subcategoría</option>
-                  @foreach($subcategories as $sc)
-                    <option value="{{ $sc->id }}">{!! $sc->name !!}</option>
-                  @endforeach
-                </select>
-                <input type="number" name="perc" class="form-control" id="" min="0" max="100">
-                <button class="btn btn-default" type="submit"><i class="fe fe-dollar-sign">Actualizar Precios</i></button>
-              </form>
-            </div>
+              <a href="{{ route('products.create') }}"><span class="fe fe-plus"></span> Nuevo Producto</a>
+              <div class="form-inline">
+                <form action="" method="POST">
+                  {{ csrf_field() }}
+                  <select class="form-control" name="category" id="filter-cat">
+                    <option value="">Seleccione Categoría</option>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{$cat_id==$category->id ? 'selected' : ''}}>{!! $category->name !!}</option>
+                    @endforeach
+                  </select>
+                  <select class="form-control" name="subcategory" id="filter-subcat">
+                    <option value="">Seleccione Subcategoría</option>
+                    @foreach($subcategories as $sc)
+                      <option value="{{ $sc->id }}" {{$scat_id==$sc->id ? 'selected' : ''}}>{!! $sc->name !!}</option>
+                    @endforeach
+                  </select>
+                  <button class="btn btn-default" type="button" onClick="filter()"><i class="fe fe-filter">Filtrar</i></button>
+                </form>
+              </div>
+              <div class="clearfix"></div>
+              <div class="form-inline">
+                <form action="{{ route('products.priceUpdate') }}" method="POST">
+                  {{ csrf_field() }}
+                  <select class="form-control" name="category" id="">
+                    <option value="">Seleccione Categoría</option>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{!! $category->name !!}</option>
+                    @endforeach
+                  </select>
+                  <select class="form-control" name="subcategory" id="">
+                    <option value="">Seleccione Subcategoría</option>
+                    @foreach($subcategories as $sc)
+                      <option value="{{ $sc->id }}">{!! $sc->name !!}</option>
+                    @endforeach
+                  </select>
+                  <input type="number" name="perc" class="form-control" id="" min="0" max="100">
+                  <button class="btn btn-default" type="submit"><i class="fe fe-dollar-sign">Actualizar Precios</i></button>
+                </form>
+              </div>
             </div>
 			      <br>
             <div class="panel-body"> 
@@ -103,6 +122,20 @@
 @section('script')
 
 <script>
+function filter() {
+  var redirect = "/admin/products?s=1";
+  var cat = $('#filter-cat').val();
+  if(cat !== undefined && cat !== '') {
+    redirect += '&category=' + cat;
+  }
+  var scat = $('#filter-subcat').val();
+  if(scat !== undefined && scat !== '') {
+    redirect += '&subcategory=' + scat;
+  }
+
+  window.location.href = redirect;
+}
+
 $(document).keypress(
   function(event){
     if (event.which == '13') {
