@@ -26,6 +26,18 @@
                       <option value="{{ $sc->id }}" {{$scat_id==$sc->id ? 'selected' : ''}}>{!! $sc->name !!}</option>
                     @endforeach
                   </select>
+                  <select class="form-control" name="provider" id="filter-prov">
+                    <option value="">Seleccione Proveedor</option>
+                    @foreach($providers as $sc)
+                      <option value="{{ $sc->id }}" {{$prov_id==$sc->id ? 'selected' : ''}}>{!! $sc->name !!}</option>
+                    @endforeach
+                  </select>
+                  <select class="form-control" name="deposit" id="filter-deposit">
+                    <option value="">Seleccione Depósito</option>
+                    @foreach($deposits as $sc)
+                      <option value="{{ $sc->id }}" {{$deposit_id==$sc->id ? 'selected' : ''}}>{!! $sc->name !!}</option>
+                    @endforeach
+                  </select>
                   <button class="btn btn-default" type="button" onClick="filter()"><i class="fe fe-filter">Filtrar</i></button>
                 </form>
               </div>
@@ -57,6 +69,8 @@
                   <tr> 
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Proveedor</th>
+                    <th scope="col">Depósito</th>
                     <th scope="col">Precio Compra</th>
                     <th scope="col">Precio Venta</th>
                     <th scope="col">Precio ML</th>
@@ -69,6 +83,8 @@
                   <tr>
                     <td scope="row">{{ $product->id }}</td>
                     <td scope="row">{{ $product->name }}</td>
+                    <td scope="row">{{ $product->provider->name }}</td>
+                    <td scope="row">{{ $product->deposit->name }}</td>
                     <td scope="row">
                       <form action="{{ route('products.quickUpdate', $product->id)}}" method="post" id="buyprice-{{$product->id}}">
                         <input type="number" name="buy_price" id="" value="{{ $product->buy_price }}" size="10" style="border:none">
@@ -131,6 +147,14 @@ function filter() {
   var scat = $('#filter-subcat').val();
   if(scat !== undefined && scat !== '') {
     redirect += '&subcategory=' + scat;
+  }
+  var dep = $('#filter-depposit').val();
+  if(dep !== undefined && dep !== '') {
+    redirect += '&deposit=' + dep;
+  }
+  var provider = $('#filter-prov').val();
+  if(provider !== undefined && provider !== '') {
+    redirect += '&provider=' + provider;
   }
 
   window.location.href = redirect;

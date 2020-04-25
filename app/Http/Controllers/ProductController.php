@@ -32,6 +32,8 @@ class ProductController extends Controller
     public function index(Request $request, Product $prod){
 		$cat_id = $request->query('category');
 		$subcat_id = $request->query('subcategory');
+		$prov_id = $request->query('provider');
+		$deposit_id = $request->query('deposit');
 
 		$query = $prod->newQuery();
 		
@@ -42,14 +44,25 @@ class ProductController extends Controller
 		if(!empty($subcat_id)) {
 			$query->where('subcategory_id', $cat_id);
 		}
+		if(!empty($prov_id)) {
+			$query->where('provider_id', $prov_id);
+		} 
+		
+		if(!empty($deposit_id)) {
+			$query->where('deposit_id', $deposit_id);
+		}
 		$products = $query->get();
 
 		return view('products.index', [
 			'products' => $products,
 			'categories' => Category::all(),
 			'subcategories' => Subcategory::all(),
+			'providers' => Provider::all(),
+			'deposits' => Deposit::all(),
 			'cat_id' => $cat_id,
 			'scat_id' => $subcat_id,
+			'prov_id' => $prov_id,
+			'deposit_id' => $deposit_id,
 		]);
 	}
 
