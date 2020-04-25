@@ -83,8 +83,8 @@
                   <tr>
                     <td scope="row">{{ $product->id }}</td>
                     <td scope="row">{{ $product->name }}</td>
-                    <td scope="row">{{ $product->provider->name }}</td>
-                    <td scope="row">{{ $product->deposit->name }}</td>
+                    <td scope="row">{{ !empty($product->provider) ? $product->provider->name : '' }}</td>
+                    <td scope="row">{{ !empty($product->deposit) ? $product->deposit->name : '' }}</td>
                     <td scope="row">
                       <form action="{{ route('products.quickUpdate', $product->id)}}" method="post" id="buyprice-{{$product->id}}">
                         <input type="number" name="buy_price" id="" value="{{ $product->buy_price }}" size="10" style="border:none">
