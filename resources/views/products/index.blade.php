@@ -142,7 +142,7 @@ function filter() {
   if(scat !== undefined && scat !== '') {
     redirect += '&subcategory=' + scat;
   }
-  var dep = $('#filter-depposit').val();
+  var dep = $('#filter-deposit').val();
   if(dep !== undefined && dep !== '') {
     redirect += '&deposit=' + dep;
   }
