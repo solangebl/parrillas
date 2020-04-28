@@ -40,19 +40,16 @@
               </div>
               <div class="clearfix"></div>
               <div class="form-inline">
-                <form action="{{ route('products.priceUpdate') }}" method="POST">
+                <form action="{{ route('products.priceUpdate') }}" onSubmit="return checkFilters()" method="POST">
                   {{ csrf_field() }}
-                  <select class="form-control" name="category" id="">
-                    <option value="">Seleccione Categoría</option>
+                  <select class="form-control" name="category" id="p_cat">
+                    <option value="">Seleccione una categoría</option>
                     @foreach($categories as $category)
                     <option value="{{ $category->id }}">{!! $category->name !!}</option>
                     @endforeach
                   </select>
-                  <select class="form-control" name="subcategory" id="">
-                    <option value="">Seleccione Subcategoría</option>
-                    @foreach($subcategories as $sc)
-                      <option value="{{ $sc->id }}">{!! $sc->name !!}</option>
-                    @endforeach
+                  <select class="form-control" name="subcategory" id="p_subcat">
+                    <option value="">Seleccione una subcategoría</option>
                   </select>
                   <input type="number" name="perc" class="form-control" id="" min="0" max="100">
                   <button class="btn btn-default" type="submit"><i class="fe fe-dollar-sign">Actualizar Precios</i></button>
@@ -157,6 +154,13 @@ function filter() {
   window.location.href = redirect;
 }
 
+function checkFilters() {
+  var filter = $('#p_cat').val()
+  if(filter === undefined || filter === '') {
+    return confirm('Confirma que desea actualizar los precios de TODOS los productos?')
+  }
+}
+
 $(document).keypress(
   function(event){
     if (event.which == '13') {
@@ -168,6 +172,7 @@ var categories = @json($categories);
 
 $(document).ready(function(){
   $('#filter-cat').on('change', function(){ loadSubcats( $('#filter-cat'), $('#filter-subcat'), categories ) });
+  $('#p_cat').on('change', function(){ loadSubcats( $('#p_cat'), $('#p_subcat'), categories ) });
 })
 </script>
 
