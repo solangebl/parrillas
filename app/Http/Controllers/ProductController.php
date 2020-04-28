@@ -55,7 +55,7 @@ class ProductController extends Controller
 
 		return view('products.index', [
 			'products' => $products,
-			'categories' => Category::all(),
+			'categories' => Category::with('subcategories')->orderBy('name', 'asc')->get(),
 			'subcategories' => Subcategory::all(),
 			'providers' => Provider::all(),
 			'deposits' => Deposit::all(),
