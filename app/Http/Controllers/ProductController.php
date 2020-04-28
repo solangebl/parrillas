@@ -241,8 +241,21 @@ class ProductController extends Controller
 				$new_price += (10-($new_price%10));
 				$new_price = round($new_price, 0);
 			}
-			// print_r($new_price. "\n");
 			$prod->sale_price = $new_price;
+			
+			$new_price = $prod->buy_price + ($prod->buy_price*$perc/100);
+			if ($new_price%10!=0) {
+				$new_price += (10-($new_price%10));
+				$new_price = round($new_price, 0);
+			}
+			$prod->buy_price = $new_price;
+
+			$new_price = $prod->sale_price_ml + ($prod->sale_price_ml*$perc/100);
+			if ($new_price%10!=0) {
+				$new_price += (10-($new_price%10));
+				$new_price = round($new_price, 0);
+			}
+			$prod->sale_price_ml = $new_price;
 			$prod->save();
 		}
 		

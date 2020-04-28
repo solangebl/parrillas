@@ -22,9 +22,6 @@
                   </select>
                   <select class="form-control" name="subcategory" id="filter-subcat">
                     <option value="">Seleccione Subcategoría</option>
-                    @foreach($subcategories as $sc)
-                      <option value="{{ $sc->id }}" {{$scat_id==$sc->id ? 'selected' : ''}}>{!! $sc->name !!}</option>
-                    @endforeach
                   </select>
                   <select class="form-control" name="provider" id="filter-prov">
                     <option value="">Seleccione Proveedor</option>
@@ -166,6 +163,12 @@ $(document).keypress(
       event.preventDefault();
     }
 });
+
+var categories = @json($categories);
+
+$(document).ready(function(){
+  $('#filter-cat').on('change', function(){ loadSubcats( $('#filter-cat'), $('#filter-subcat'), categories ) });
+})
 </script>
 
 @endsection
