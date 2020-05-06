@@ -83,7 +83,7 @@ class ProductController extends Controller
     public function store(Request $request){
 		$rules = [
 			'provider_id' => 'required',
-			'thumbnail' => 'required|image|mimes:jpg,jpeg,bmp,png|max:5000',
+			'thumbnail' => 'required|image|mimes:jpg,jpeg,bmp,png|max:1000',
 			'description' => 'required',
 			'category_id' => 'required',
 			'name' => 'required',
@@ -93,7 +93,7 @@ class ProductController extends Controller
 		$images = isset($request->images) ? count($request->images) : 0;
 		if(!empty($request->input('images')[0])){
 			foreach(range(0, $images) as $index){
-			$rules['images.'. $index] = 'image|mimes:jpg,jpeg,bmp,png|max:5000';
+			$rules['images.'. $index] = 'image|mimes:jpg,jpeg,bmp,png|max:1000';
 			}
 		}
 		$validatedData = $request->validate($rules);
@@ -171,11 +171,11 @@ class ProductController extends Controller
 		$images = isset($request->images) ? count($request->images) : 0;
 		if(!empty($request->input('images')[0])){
 			foreach(range(0, $images) as $index){
-			  $rules['images.'. $index] = 'image|mimes:jpg,jpeg,bmp,png|max:5000';
+			  $rules['images.'. $index] = 'image|mimes:jpg,jpeg,bmp,png|max:1000';
 			}
 		}
 		if (isset($request->thumbnail)) {
-			$rules['thumbnail'] = 'image|mimes:jpg,jpeg,bmp,png|max:5000';
+			$rules['thumbnail'] = 'image|mimes:jpg,jpeg,bmp,png|max:1000';
 		}
 		$validatedData = $request->validate($rules);
 
