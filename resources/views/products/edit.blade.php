@@ -111,7 +111,7 @@
                   <div class='col-md-6 col-sm-12'>
                     <div class='form-group'>
                       <label for="text">Descripción</label>
-                      <textarea class="form-control description" id="description" name="description" size="30" rows="10" maxlength="500">{{$product->description}}</textarea>
+                      <textarea class="form-control description" id="description" required name="description" size="30" rows="10" maxlength="500">{{$product->description}}</textarea>
                     </div>
                   </div>
                   <div class='col-md-6 col-sm-12'>
