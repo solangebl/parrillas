@@ -169,7 +169,7 @@ class ProductController extends Controller
 			'sale_price' => 'required',
 		];
 		$images = isset($request->images) ? count($request->images) : 0;
-		if(!empty($request->input('images')[0])){
+		if(!empty($request->images[0])){
 			foreach(range(0, $images) as $index){
 			  $rules['images.'. $index] = 'image|max:1000';
 			}
