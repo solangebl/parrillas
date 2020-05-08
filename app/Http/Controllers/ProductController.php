@@ -171,11 +171,11 @@ class ProductController extends Controller
 		$images = isset($request->images) ? count($request->images) : 0;
 		if(!empty($request->input('images')[0])){
 			foreach(range(0, $images) as $index){
-			  $rules['images.'. $index] = 'image|mimes:jpg,jpeg,bmp,png|max:1000';
+			  $rules['images.'. $index] = 'image|mimes:jpg,jpeg,bmp,png|min:1|max:1000';
 			}
 		}
 		if (isset($request->thumbnail)) {
-			$rules['thumbnail'] = 'image|mimes:jpg,jpeg,bmp,png|max:1000';
+			$rules['thumbnail'] = 'image|mimes:jpg,jpeg,bmp,png|min:1|max:1000';
 		}
 		$validatedData = $request->validate($rules);
 
