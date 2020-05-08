@@ -171,12 +171,13 @@ class ProductController extends Controller
 		$images = isset($request->images) ? count($request->images) : 0;
 		if(!empty($request->input('images')[0])){
 			foreach(range(0, $images) as $index){
-			  $rules['images.'. $index] = 'image|mimes:jpg,jpeg,bmp,png|size:max:1000';
+			  $rules['images.'. $index] = 'image|max:1000';
 			}
 		}
 		if (isset($request->thumbnail)) {
-			$rules['thumbnail'] = 'image|mimes:jpg,jpeg,bmp,png|size:max:1000';
+			$rules['thumbnail'] = 'image|max:1000';
 		}
+		print_r($rules); die;
 		$validatedData = $request->validate($rules);
 
 		$product = Product::find($id);
