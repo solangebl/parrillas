@@ -35,11 +35,11 @@
                       <option value="{{ $sc->id }}" {{$deposit_id==$sc->id ? 'selected' : ''}}>{!! $sc->name !!}</option>
                     @endforeach
                   </select>
-                  <button class="btn btn-default" type="button" onClick="filter()"><i class="fe fe-filter">Filtrar</i></button>
+                  <button class="btn btn-primary" type="button" onClick="filter()"><i class="fe fe-filter">Filtrar</i></button>
                 </form>
               </div>
               <div class="clearfix"></div>
-              <div class="form-inline">
+              <div class="form-inline mt-2">
                 <form action="{{ route('products.priceUpdate') }}" onSubmit="return checkFilters()" method="POST">
                   {{ csrf_field() }}
                   <select class="form-control" name="category" id="p_cat">
@@ -52,7 +52,7 @@
                     <option value="">Seleccione una subcategoría</option>
                   </select>
                   <input type="number" name="perc" class="form-control" id="" min="0" max="100">
-                  <button class="btn btn-default" type="submit"><i class="fe fe-dollar-sign">Actualizar Precios</i></button>
+                  <button class="btn btn-primary" type="submit"><i class="fe fe-dollar-sign">Actualizar Precios</i></button>
                 </form>
               </div>
             </div>
@@ -62,7 +62,7 @@
                 <thead>
                   <tr> 
                     <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col" class="w-25">Nombre</th>
                     <th scope="col">Proveedor</th>
                     <th scope="col">Depósito</th>
                     <th scope="col">Precio Compra</th>
@@ -81,7 +81,7 @@
                     <td scope="row">{{ !empty($product->deposit) ? $product->deposit->name : '' }}</td>
                     <td scope="row">
                       <form action="{{ route('products.quickUpdate', $product->id)}}" method="post" id="buyprice-{{$product->id}}">
-                        <input type="number" name="buy_price" id="" value="{{ $product->buy_price }}" size="10" style="border:none">
+                        <input type="number" name="buy_price" id="" value="{{ $product->buy_price }}" size="10" class="form-control">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <button class="btn btn-link btn-quick-save" id="btn-buyprice-{{$product->id}}" type="button" onClick="product_edit('buyprice-'+ {{$product->id}})" ><i class="fe fe-check-circle"></i></button>
@@ -89,7 +89,7 @@
                     </td>
                     <td scope="row">
                       <form action="{{ route('products.quickUpdate', $product->id)}}" method="post" id="price-{{$product->id}}">
-                        <input type="number" name="sale_price" id="" value="{{ $product->sale_price }}" size="10" style="border:none">
+                        <input type="number" name="sale_price" id="" value="{{ $product->sale_price }}" size="10" class="form-control">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <button class="btn btn-link btn-quick-save" id="btn-price-{{$product->id}}" type="button" onClick="product_edit('price-'+ {{$product->id}})" ><i class="fe fe-check-circle"></i></button>
@@ -97,7 +97,7 @@
                     </td>
                     <td scope="row">
                       <form action="{{ route('products.quickUpdate', $product->id)}}" method="post" id="priceml-{{$product->id}}">
-                        <input type="number" name="sale_price_ml" id="" value="{{ $product->sale_price_ml }}" size="10" style="border:none">
+                        <input type="number" name="sale_price_ml" id="" value="{{ $product->sale_price_ml }}" size="10" class="form-control">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <button class="btn btn-link btn-quick-save" id="btn-priceml-{{$product->id}}" type="button" onClick="product_edit('priceml-'+ {{$product->id}})" ><i class="fe fe-check-circle"></i></button>
@@ -105,7 +105,7 @@
                     </td>
                     <td scope="row">
                       <form action="{{ route('products.quickUpdate', $product->id)}}" method="post" id="stock-{{$product->id}}">
-                        <input type="number" name="amount" id="" value="{{ $product->amount }}" size="10" style="border:none">
+                        <input type="number" name="amount" id="" value="{{ $product->amount }}" size="10" class="form-control">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <button class="btn btn-link btn-quick-save" id="btn-stock-{{$product->id}}" type="button" onClick="product_edit('stock-' + {{$product->id}} )" ><i class="fe fe-check-circle"></i></button>
